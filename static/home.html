@@ -1,0 +1,240 @@
+<div ng-if="data.is_admin === true">
+    <md-toolbar class="md-whiteframe-z1" ng-show="!showfilter">
+        <div class="md-toolbar-tools">
+            <h3>Form Builder</h3>
+            <md-button ng-click="resetFields()">
+                <md-icon class="mdi mdi-plus-circle"></md-icon>
+                Add New Form Field
+            </md-button>
+            <div class="filter" layout="row">
+                <md-button ng-show="!showfilter" ng-click="search()">
+                    <md-icon class="mdi mdi-magnify"></md-icon>
+                    Search Fields
+                </md-button>
+            </div>
+            <span flex=""></span>
+            <md-button ng-click="show()" ng-hide="showeditdelete">
+                <span>Edit Mode</span>
+            </md-button>
+            <md-button ng-click="close()" ng-hide="!showeditdelete">
+                <span>Close</span>
+            </md-button>
+            <md-button ng-click="logout()">Log Out</md-button>
+        </div>
+    </md-toolbar>
+    <md-toolbar class="md-accent searchToolbar" ng-show="showfilter">
+        <div class="md-toolbar-tools">
+            <md-button ng-show="showfilter" ng-click="closeSearch()">
+                <md-icon class="mdi mdi-arrow-left"></md-icon>
+                Close
+            </md-button>
+            <md-input-container class="searchField" layout-fill ng-show="showfilter">
+                <label>Enter Search Term.. </label>
+                <input type="text" ng-model="asd.formfieldsearch">
+            </md-input-container>
+            <span flex=""></span>
+            <md-button ng-click="show()" ng-hide="showeditdelete">
+                <span>Edit Mode</span>
+            </md-button>
+            <md-button ng-click="close()" ng-hide="!showeditdelete">
+                <span>Close</span>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <!--End of Top Toolbar-->
+    <!--Sidenav-->
+    <md-sidenav flex layout="column" class="md-sidenav-left md-whiteframe-z2 sidenav" md-component-id="left">
+        <md-toolbar layout="row">
+            <h1 ng-hide="editing==true" class="md-toolbar-tools">Add a Field</h1>
+            <h1 ng-show="editing==true" class="md-toolbar-tools">Edit a Field</h1>
+            <span flex=""></span>
+            <md-button ng-hide="editing" ng-click="addfield(add)" class="md-raised md-warn">Add Field</md-button>
+            <md-button ng-show="editing" ng-click="editsave(add)" class="md-raised md-warn">Edit Field</md-button>
+        </md-toolbar>
+        <md-content layout-padding>
+            <md-input-container class="selectfield">
+                <label>Select your Field</label>
+                <md-select ng-model="add.field_name">
+                    <md-option ng-repeat="field in fields" value="{{field}}">
+                        {{ field }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <!-- <md-button ng-click="addfield()" class="md-raised md-primary">Add Field</md-button> -->
+            <div ng-show="add.field_name=='text'">
+                <md-input-container layout-fill>
+                    <label>Enter Label</label>
+                    <input type="text" ng-model="add.label_name">
+                </md-input-container>
+                <md-button class="md-raised help_button" ng-click="help=true">Add Help Text</md-button>
+                <md-input-container ng-show="help==true">
+                    <label>Add Help Text</label>
+                    <input type="text" ng-model="add.help_text">
+                </md-input-container>
+            </div>
+            <div ng-show="add.field_name=='password'">
+                <md-input-container layout-fill>
+                    <label>Enter Label</label>
+                    <input type="text" ng-model="add.label_name">
+                </md-input-container>
+                <md-button class="md-raised help_button" ng-click="help=true">Add Help Text</md-button>
+                <md-input-container ng-show="help==true">
+                    <label>Add Help Text</label>
+                    <input type="text" ng-model="add.help_text">
+                </md-input-container>
+            </div>
+            <div ng-show="add.field_name=='telephone'">
+                <md-input-container layout-fill>
+                    <label>Enter Label</label>
+                    <input type="text" ng-model="add.label_name">
+                </md-input-container>
+                <md-button class="md-raised help_button" ng-click="help=true">Add Help Text</md-button>
+                <md-input-container ng-show="help==true">
+                    <label>Add Help Text</label>
+                    <input type="text" ng-model="add.help_text">
+                </md-input-container>
+            </div>
+            <div ng-show="add.field_name=='textarea'">
+                <md-input-container layout-fill>
+                    <label>Enter Label</label>
+                    <input type="text" ng-model="add.label_name">
+                </md-input-container>
+                <md-button class="md-raised help_button" ng-click="help=true">Add Help Text</md-button>
+                <md-input-container ng-show="help==true">
+                    <label>Add Help Text</label>
+                    <input type="text" ng-model="add.help_text">
+                </md-input-container>
+            </div>
+            <div ng-show="add.field_name=='select'">
+                <md-input-container>
+                    <label>Enter Label</label>
+                    <input type="text" ng-model="add.label_name">
+                    <md-button ng-click="options()" ng-model="counter" class="md-raised help_select">Add Options</md-button>
+                </md-input-container>
+                <md-input-container ng-repeat="option in add.options">
+                    <label>Options</label>
+                    <input type="text" ng-model="option.options_name">
+                </md-input-container>
+            </div>
+            <div ng-show="add.field_name=='radio'">
+                <md-button class="md-raised help_button" ng-click="radio()">Add Radio and Label</md-button>
+                <md-input-container ng-repeat="radio in add.options">
+                    <input type="text" ng-model="radio.options_name">
+                    <span class="hint" style="font-size:10px;">Enter the label name beside the radio button</span>
+                </md-input-container>
+            </div>
+            <div ng-show="add.field_name == 'checkbox'">
+                <md-input-container>
+                    <label>Enter the label for the Checkbox</label>
+                    <input type="text" ng-model="add.label_name">
+                </md-input-container>
+            </div>
+            <div ng-show="add.field_name == 'button'">
+                <md-input-container>
+                    <label>Enter Value for the button</label>
+                    <input type="text" ng-model="add.label_name">
+                </md-input-container>
+            </div>
+        </md-content>
+    </md-sidenav>
+    <!--End of Sidenav-->
+</div>
+<!--Toolbar for normal users-->
+<md-toolbar ng-show="data.is_admin === false">
+    <div class="md-toolbar-tools">
+        <h3>Form Builder</h3>
+        <span flex=""></span>
+        <md-button ng-click="logout()">Log Out</md-button>
+    </div>
+</md-toolbar>
+<!--Page Content-->
+<md-content layout="column">
+    <md-list flex>
+        <md-list-item class="list-item" layout="row" ng-repeat="field in formfields | filter: asd.formfieldsearch">
+            <div ng-if="field.field_name == 'text' " layout="column" flex>
+                <md-input-container>
+                    <label>{{field.label_name}}</label>
+                    <input type="text">
+                    <span class="hint" style="font-size:10px;">{{field.help_text}}</span>
+                </md-input-container>
+                <div class="icons" ng-if="showeditdelete==true">
+                    <md-icon layout="row" ng-if="field" ng-click="editfields(field)" class="mdi mdi-pencil edit editfield "></md-icon>
+                    <md-icon layout="row" ng-if="field" ng-click="deletefields($event,field)" class="mdi mdi-delete delete deletefield"></md-icon>
+                </div>
+            </div>
+            <div ng-if="field.field_name == 'password' " layout="column" flex>
+                <md-input-container>
+                    <label>{{field.label_name}}</label>
+                    <input type="password">
+                    <span class="hint" style="font-size:10px;">{{field.help_text}}</span>
+                </md-input-container>
+                <div class="icons" ng-if="showeditdelete==true">
+                    <md-icon layout="row" ng-if="field" ng-click="editfields(field)" class="mdi mdi-pencil edit editfield"></md-icon>
+                    <md-icon layout="row" ng-if="field" ng-click="deletefields($event,field)" class="mdi mdi-delete delete deletefield"></md-icon>
+                </div>
+            </div>
+            <div ng-if="field.field_name == 'telephone' " layout="column" flex>
+                <md-input-container>
+                    <label>{{field.label_name}}</label>
+                    <input type="telephone">
+                    <div class="hint">{{field.help_text}}</div>
+                </md-input-container>
+                <div class="icons" ng-if="showeditdelete==true">
+                    <md-icon layout="row" ng-if="field" ng-click="editfields(field)" class="mdi mdi-pencil edit editfield"></md-icon>
+                    <md-icon layout="row" ng-if="field" ng-click="deletefields($event,field)" class="mdi mdi-delete delete deletefield"></md-icon>
+                </div>
+            </div>
+            <div ng-if="field.field_name == 'textarea' " layout="column" flex>
+                <md-input-container>
+                    <label>{{field.label_name}}</label>
+                    <textarea rows="5"></textarea>
+                    <span class="hint" style="font-size:10px;">{{field.help_text}}</span>
+                </md-input-container>
+                <div class="icons" ng-if="showeditdelete==true">
+                    <md-icon layout="row" ng-if="field" ng-click="editfields(field)" class="mdi mdi-pencil edit editfield"></md-icon>
+                    <md-icon layout="row" ng-if="field" ng-click="deletefields($event,field)" class="mdi mdi-delete delete deletefield"></md-icon>
+                </div>
+            </div>
+            <div ng-if="field.field_name == 'select' " layout="column" flex>
+                <md-input-container>
+                    <label>{{field.label_name}}</label>
+                    <md-select ng-model="field.value">
+                        <md-option ng-repeat="option in field.options track by $index" value="{{option.id}}">{{option.options_name}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <div class="icons" ng-if="showeditdelete==true">
+                    <md-icon layout="row" ng-if="field" ng-click="editfields(field)" class="mdi mdi-pencil edit editfield"></md-icon>
+                    <md-icon layout="row" ng-if="field" ng-click="deletefields($event,field)" class="mdi mdi-delete delete deletefield"></md-icon>
+                </div>
+            </div>
+            <div ng-if="field.field_name == 'radio' " layout="column" flex>
+                <md-radio-group layout="row" ng-model="field.value">
+                    <md-radio-button ng-repeat="radio in field.options track by $index" value="{{radio.id}}">{{radio.options_name}}</md-radio-button>
+                </md-radio-group>
+                <div class="icons" ng-if="showeditdelete==true">
+                    <md-icon layout="row" ng-if="field" ng-click="editfields(field)" class="mdi mdi-pencil edit editfield"></md-icon>
+                    <md-icon layout="row" ng-if="field" ng-click="deletefields($event,field)" class="mdi mdi-delete delete deletefield"></md-icon>
+                </div>
+            </div>
+            <div ng-if="field.field_name == 'checkbox' " layout="column" flex>
+                <md-checkbox>
+                    {{ field.label_name }}
+                </md-checkbox>
+                <div class="icons" ng-if="showeditdelete==true">
+                    <md-icon layout="row" ng-if="field" ng-click="editfields(field)" class="mdi mdi-pencil edit editfield"></md-icon>
+                    <md-icon layout="row" ng-if="field" ng-click="deletefields($event,field)" class="mdi mdi-delete delete deletefield"></md-icon>
+                </div>
+            </div>
+            <div ng-if="field.field_name == 'button'" layout="column" flex>
+                <md-button class="md-raised md-primary field_button">
+                    {{field.label_name}}
+                </md-button>
+                <div class="icons" ng-if="showeditdelete==true">
+                    <md-icon layout="row" ng-if="field" ng-click="editfields(field)" class="mdi mdi-pencil edit editfield"></md-icon>
+                    <md-icon layout="row" ng-if="field" ng-click="deletefields($event,field)" class="mdi mdi-delete delete deletefield"></md-icon>
+                </div>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-content>
+<!--End of Page Content-->

@@ -1,0 +1,123 @@
+button .material-icons {
+	margin-top: 7px;
+}
+
+.icons {
+	margin-top:7px;
+}
+
+.icons .edit {
+	margin-right: 7px;
+}
+
+/*.md-sidenav-left {
+	text-align:center;
+}*/
+
+
+.sidenav {
+	position:fixed;
+}
+
+md-backdrop {
+	position: fixed;
+}
+
+.field_button {
+	width:20px;
+	margin-left:-1px;
+}
+
+.list-item {
+	padding-left:40px;
+	width:800px;
+	margin:10px auto;
+}
+
+
+
+
+.help_button {
+	margin-top:0;
+	margin-left:0;
+}
+.help_select {
+	margin-top:10px;
+	margin-left:0;
+}
+
+.searchField {
+	margin-top:30px;
+
+}
+
+.searchField label {
+	color:#fff;
+}
+
+
+.editfield {
+	background-color: rgb(255,89,89);
+	padding: 5px;
+	border-radius:4px;
+	color: #fff;
+	margin-bottom:9px;
+	
+	
+}
+
+.deletefield {
+	background-color: rgb(255,89,89);
+	padding: 5px;
+	border-radius:4px;
+	color: #fff;
+	margin-bottom:9px;
+
+}
+
+div.hint {
+	font-size:10px;
+}
+
+md-input-container {
+	margin-top:15px;
+	margin-bottom:2px;
+}
+
+.loginButton {
+	width:20px;
+}
+
+.login_container {
+	width: 550px;
+	margin: 50px auto;
+	border-radius:5px;
+	padding:25px;
+}
+
+.login-content {
+	padding: 40px;
+	border-radius: 15px;
+
+}
+
+
+md-select {
+	margin-top:15px;
+	margin-bottom:2px;
+
+}
+
+ md-input-container.searchField:not(.md-input-invalid).md-input-focused label {
+	color:white;
+}
+md-input-container.searchField:not(.md-input-invalid) .md-input {
+	border-color: #fff;
+}
+md-input-container.searchField:not(.md-input-invalid).md-input-focused .md-input {
+    border-color: #fff;
+    color:#fff;
+}
+
+
+/*animation*/

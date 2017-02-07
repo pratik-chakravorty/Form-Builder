@@ -1,0 +1,28 @@
+<md-toolbar>
+	<div class="md-toolbar-tools">
+		<h2>Form Builder</h2>
+	</div>
+</md-toolbar>
+
+
+
+<div layout="column" class="login_container md-whiteframe-1dp ">
+	
+	    <h2>Log In</h2>
+	    <form layout="column" flex="66" >
+	        <md-input-container>
+	            <label>Enter your Email</label>
+	            <input type="email" ng-model="loginForm.email" />
+	        </md-input-container>
+	        <md-input-container>
+	            <label>Enter your Password</label>
+	            <input type="password" ng-model="loginForm.password" />
+	        </md-input-container> 
+	    </form>
+	 <md-button class="md-raised md-primary loginButton" ng-click="login()">Log in</md-button>
+	 <span class="register_link">New User? Please <a href="#/register" class="md-raised">Register</a></span>
+
+</div>
+
+
+
